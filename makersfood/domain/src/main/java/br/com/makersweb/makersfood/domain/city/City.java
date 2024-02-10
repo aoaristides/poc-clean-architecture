@@ -2,6 +2,7 @@ package br.com.makersweb.makersfood.domain.city;
 
 import br.com.makersweb.makersfood.domain.AggregateRoot;
 import br.com.makersweb.makersfood.domain.state.StateID;
+import br.com.makersweb.makersfood.domain.utils.InstantUtils;
 import br.com.makersweb.makersfood.domain.validation.ValidationHandler;
 
 import java.time.Instant;
@@ -33,7 +34,7 @@ public class City extends AggregateRoot<CityID> {
 
     public static City newCity(final String name) {
         final var anId = CityID.unique();
-        final var now = Instant.now();
+        final var now = InstantUtils.now();
         return new City(anId, name, null, now, now);
     }
 
@@ -61,14 +62,14 @@ public class City extends AggregateRoot<CityID> {
             return this;
         }
         this.state = state;
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
     public City update(final String name, final StateID state) {
         this.name = name;
         this.state = state;
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 

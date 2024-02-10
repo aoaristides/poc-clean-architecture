@@ -5,6 +5,7 @@ import br.com.makersweb.makersfood.domain.kitchen.KitchenID;
 import br.com.makersweb.makersfood.domain.payment.PaymentID;
 import br.com.makersweb.makersfood.domain.product.ProductID;
 import br.com.makersweb.makersfood.domain.user.UserID;
+import br.com.makersweb.makersfood.domain.utils.InstantUtils;
 import br.com.makersweb.makersfood.domain.validation.ValidationHandler;
 
 import java.math.BigDecimal;
@@ -135,19 +136,19 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
         this.payments = new ArrayList<>(payments != null ? payments : Collections.emptyList());
         this.products = new ArrayList<>(products != null ? products : Collections.emptyList());
         this.responsibles = new ArrayList<>(responsibles != null ? responsibles : Collections.emptyList());
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
     public Restaurant deactivate() {
         this.active = false;
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
     public Restaurant activate() {
         this.active = true;
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -156,7 +157,7 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
             return this;
         }
         this.payments.add(paymentID);
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -165,7 +166,7 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
             return this;
         }
         this.payments.addAll(payments);
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -174,7 +175,7 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
             return this;
         }
         this.products.add(productID);
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -192,7 +193,7 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
             return this;
         }
         this.responsibles.add(userID);
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -201,7 +202,7 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
             return this;
         }
         this.responsibles.addAll(users);
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 

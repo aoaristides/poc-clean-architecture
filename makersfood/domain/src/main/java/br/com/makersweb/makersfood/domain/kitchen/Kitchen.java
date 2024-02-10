@@ -2,6 +2,7 @@ package br.com.makersweb.makersfood.domain.kitchen;
 
 import br.com.makersweb.makersfood.domain.AggregateRoot;
 import br.com.makersweb.makersfood.domain.restaurant.RestaurantID;
+import br.com.makersweb.makersfood.domain.utils.InstantUtils;
 import br.com.makersweb.makersfood.domain.validation.ValidationHandler;
 
 import java.time.Instant;
@@ -36,7 +37,7 @@ public class Kitchen extends AggregateRoot<KitchenID> {
 
     public static Kitchen newKitchen(final String name) {
         final var anId = KitchenID.unique();
-        final var now = Instant.now();
+        final var now = InstantUtils.now();
         return new Kitchen(anId, name, new ArrayList<>(), now, now);
     }
 
@@ -62,7 +63,7 @@ public class Kitchen extends AggregateRoot<KitchenID> {
     public Kitchen update(final String name, final List<RestaurantID> restaurants) {
         this.name = name;
         this.restaurants = new ArrayList<>(restaurants != null ? restaurants : Collections.emptyList());
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -71,7 +72,7 @@ public class Kitchen extends AggregateRoot<KitchenID> {
             return this;
         }
         this.restaurants.add(restaurantID);
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 
@@ -80,7 +81,7 @@ public class Kitchen extends AggregateRoot<KitchenID> {
             return this;
         }
         this.restaurants.addAll(restaurants);
-        this.updatedAt = Instant.now();
+        this.updatedAt = InstantUtils.now();
         return this;
     }
 

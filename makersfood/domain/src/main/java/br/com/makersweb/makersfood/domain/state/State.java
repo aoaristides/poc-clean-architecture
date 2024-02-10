@@ -1,6 +1,7 @@
 package br.com.makersweb.makersfood.domain.state;
 
 import br.com.makersweb.makersfood.domain.AggregateRoot;
+import br.com.makersweb.makersfood.domain.utils.InstantUtils;
 import br.com.makersweb.makersfood.domain.validation.ValidationHandler;
 
 import java.time.Instant;
@@ -31,7 +32,7 @@ public class State extends AggregateRoot<StateID> {
             final String name
     ) {
         final var anId = StateID.unique();
-        final var now = Instant.now();
+        final var now = InstantUtils.now();
         return new State(anId, name, now, now);
     }
 
