@@ -1,0 +1,3 @@
+rootProject.name = 'makersfood'
+include 'domain'
+
