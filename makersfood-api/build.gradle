@@ -1,0 +1,70 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.flywaydb:flyway-database-postgresql:10.7.2'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.2'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'org.flywaydb.flyway' version '10.7.2'
+}
+
+group = 'br.com.makersweb.makersfood'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = '21'
+}
+
+bootJar {
+    setArchiveBaseName('application')
+    destinationDirectory.set(file("${rootProject.buildDir}/libs"))
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation('org.postgresql:postgresql')
+
+    implementation('org.springdoc:springdoc-openapi-webmvc-core:1.7.0')
+    implementation('org.springdoc:springdoc-openapi-ui:1.7.0')
+
+    implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+
+    implementation('org.springframework.boot:spring-boot-starter-undertow')
+    implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('com.fasterxml.jackson.module:jackson-module-afterburner')
+
+    compileOnly('org.projectlombok:lombok')
+    developmentOnly('org.springframework.boot:spring-boot-devtools')
+    annotationProcessor('org.projectlombok:lombok')
+
+    testImplementation('org.flywaydb:flyway-core')
+    testImplementation('org.flywaydb:flyway-database-postgresql')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+flyway {
+    url = System.getenv('FLYWAY_DB') ?: 'jdbc:postgresql://localhost:5432/adm_makersfood_db'
+    user = System.getenv('FLYWAY_USER') ?: 'adm_makers_user'
+    password = System.getenv('FLYWAY_PASS') ?: 'Salmos89!'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

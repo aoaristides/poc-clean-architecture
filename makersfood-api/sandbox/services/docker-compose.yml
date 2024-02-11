@@ -1,0 +1,52 @@
+version: '3.9'
+
+services:
+
+  postgres:
+    container_name: adm_makersfood_postgres
+    image: postgres:15-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=Salmos89!
+      - POSTGRES_USER=adm_makers_user
+      - POSTGRES_DB=adm_makersfood_db
+    volumes:
+      - '../.docker/db/data:/var/lib/postgresql/data'
+    networks:
+      - adm_makersfood_services
+
+#  rabbit:
+#    container_name: adm_makersfood_rabbitmq
+#    image: rabbitmq:3-management
+#    environment:
+#      - RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG
+#      - RABBITMQ_DEFAULT_USER=adm_makersfood
+#      - RABBITMQ_DEFAULT_PASS=Salmos89#
+#      - RABBITMQ_DEFAULT_VHOST=/
+#    ports:
+#      - "15672:15672"
+#      - "5672:5672"
+#    networks:
+#      - adm_makersfood_services
+#
+#  keycloak:
+#    container_name: adm_makersfood_keycloak
+#    image: quay.io/keycloak/keycloak:20.0.3
+#    environment:
+#      - KEYCLOAK_ADMIN=admin
+#      - KEYCLOAK_ADMIN_PASSWORD=admin
+#    ports:
+#      - "8443:8080"
+#    command:
+#      #      - start-dev # Utilizar esse comando quando a aplicação estiver executando fora do Docker
+#      - start-dev --hostname-url=http://keycloak:8080 # Utilizar esse comando quando a aplicação estiver dentro do Docker
+#    volumes:
+#      - '../.docker/keycloak:/opt/keycloak/data/h2:rw'
+#    networks:
+#      - adm_makersfood_services
+
+networks:
+  adm_makersfood_services:
+    external: true
