@@ -109,7 +109,7 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
 
     @Override
     public void validate(final ValidationHandler handler) {
-
+        new RestaurantValidator(this, handler).validate();
     }
 
     public Restaurant update(
