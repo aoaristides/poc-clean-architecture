@@ -1,5 +1,7 @@
 package br.com.makersweb.makersfood.infrastructure.state.persistence;
 
+import br.com.makersweb.makersfood.domain.state.State;
+import br.com.makersweb.makersfood.domain.state.StateID;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -26,6 +28,46 @@ public class StateJpaEntity {
 
     @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP")
     private Instant updatedAt;
+
+    public StateJpaEntity() {}
+
+    private StateJpaEntity(
+            final String id,
+            final String name,
+            final Instant createdAt,
+            final Instant updatedAt
+    ) {
+        this.id = id;
+        this.name = name;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    private StateJpaEntity(final String id) {
+        this.id = id;
+    }
+
+    public static StateJpaEntity from(final State aState) {
+        return new StateJpaEntity(
+                aState.getId().getValue(),
+                aState.getName(),
+                aState.getCreatedAt(),
+                aState.getUpdatedAt()
+        );
+    }
+
+    public static StateJpaEntity from(final String anId) {
+        return new StateJpaEntity(anId);
+    }
+
+    public State toAggregate() {
+        return State.with(
+                StateID.from(getId()),
+                getName(),
+                getCreatedAt(),
+                getUpdatedAt()
+        );
+    }
 
     public String getId() {
         return id;

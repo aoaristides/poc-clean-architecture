@@ -12,11 +12,15 @@ import java.util.Optional;
 public interface CityGateway {
 
     City create(final City city);
+
     void deleteById(final CityID anId);
+
     Optional<City> findById(final CityID anId);
 
     City update(final City city);
+
     Pagination<City> findAll(final SearchQuery aQuery);
+
     List<CityID> existsByIds(final Iterable<CityID> ids);
 
 }

@@ -77,6 +77,10 @@ public class City extends AggregateRoot<CityID> {
         return name;
     }
 
+    public StateID getState() {
+        return state;
+    }
+
     public Instant getCreatedAt() {
         return createdAt;
     }

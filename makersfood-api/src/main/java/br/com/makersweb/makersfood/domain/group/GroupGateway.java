@@ -12,11 +12,15 @@ import java.util.Optional;
 public interface GroupGateway {
 
     Group create(final Group group);
+
     void deleteById(final GroupID anId);
+
     Optional<Group> findById(final GroupID anId);
 
     Group update(final Group group);
+
     Pagination<Group> findAll(final SearchQuery aQuery);
+
     List<GroupID> existsByIds(final Iterable<GroupID> ids);
 
 }

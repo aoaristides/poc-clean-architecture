@@ -12,11 +12,15 @@ import java.util.Optional;
 public interface OrderItemGateway {
 
     OrderItem create(final OrderItem item);
+
     void deleteById(final OrderItemID anId);
+
     Optional<OrderItem> findById(final OrderItemID anId);
 
     OrderItem update(final OrderItem item);
+
     Pagination<OrderItem> findAll(final SearchQuery aQuery);
+
     List<OrderItemID> existsByIds(final Iterable<OrderItemID> ids);
 
 }

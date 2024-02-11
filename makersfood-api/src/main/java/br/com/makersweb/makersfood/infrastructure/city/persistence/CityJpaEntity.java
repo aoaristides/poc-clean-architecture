@@ -1,5 +1,8 @@
 package br.com.makersweb.makersfood.infrastructure.city.persistence;
 
+import br.com.makersweb.makersfood.domain.city.City;
+import br.com.makersweb.makersfood.domain.city.CityID;
+import br.com.makersweb.makersfood.domain.state.StateID;
 import br.com.makersweb.makersfood.infrastructure.state.persistence.StateJpaEntity;
 import jakarta.persistence.*;
 
@@ -28,6 +31,43 @@ public class CityJpaEntity {
 
     @Column(name = "updated_at", nullable = false, columnDefinition = "TIMESTAMP")
     private Instant updatedAt;
+
+    public CityJpaEntity() {
+    }
+
+    private CityJpaEntity(
+            final String id,
+            final String name,
+            final StateJpaEntity state,
+            final Instant createdAt,
+            final Instant updatedAt
+    ) {
+        this.id = id;
+        this.name = name;
+        this.state = state;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public static CityJpaEntity from(final City aCity) {
+        return new CityJpaEntity(
+                aCity.getId().getValue(),
+                aCity.getName(),
+                StateJpaEntity.from(aCity.getState().getValue()),
+                aCity.getCreatedAt(),
+                aCity.getUpdatedAt()
+        );
+    }
+
+    public City toAggregate() {
+        return City.with(
+                CityID.from(getId()),
+                getName(),
+                StateID.from(getState().getId()),
+                getCreatedAt(),
+                getUpdatedAt()
+        );
+    }
 
     public String getId() {
         return id;
