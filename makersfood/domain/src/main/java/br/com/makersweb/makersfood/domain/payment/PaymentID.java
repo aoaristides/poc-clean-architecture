@@ -1,9 +1,9 @@
 package br.com.makersweb.makersfood.domain.payment;
 
 import br.com.makersweb.makersfood.domain.Identifier;
+import br.com.makersweb.makersfood.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author aaristides
@@ -17,15 +17,11 @@ public class PaymentID extends Identifier {
     }
 
     public static PaymentID unique() {
-        return PaymentID.from(UUID.randomUUID());
+        return PaymentID.from(IdUtils.uuid());
     }
 
     public static PaymentID from(final String anId) {
         return new PaymentID(anId);
-    }
-
-    public static PaymentID from(final UUID anId) {
-        return new PaymentID(anId.toString().toLowerCase());
     }
 
     @Override

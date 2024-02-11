@@ -1,9 +1,9 @@
 package br.com.makersweb.makersfood.domain.state;
 
 import br.com.makersweb.makersfood.domain.Identifier;
+import br.com.makersweb.makersfood.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author aaristides
@@ -17,15 +17,11 @@ public class StateID extends Identifier {
     }
 
     public static StateID unique() {
-        return StateID.from(UUID.randomUUID());
+        return StateID.from(IdUtils.uuid());
     }
 
     public static StateID from(final String anId) {
         return new StateID(anId);
-    }
-
-    public static StateID from(final UUID anId) {
-        return new StateID(anId.toString().toLowerCase());
     }
 
     @Override

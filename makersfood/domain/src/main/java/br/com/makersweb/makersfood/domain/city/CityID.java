@@ -1,9 +1,9 @@
 package br.com.makersweb.makersfood.domain.city;
 
 import br.com.makersweb.makersfood.domain.Identifier;
+import br.com.makersweb.makersfood.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author aaristides
@@ -17,15 +17,11 @@ public class CityID extends Identifier {
     }
 
     public static CityID unique() {
-        return CityID.from(UUID.randomUUID());
+        return CityID.from(IdUtils.uuid());
     }
 
     public static CityID from(final String anId) {
         return new CityID(anId);
-    }
-
-    public static CityID from(final UUID anId) {
-        return new CityID(anId.toString().toLowerCase());
     }
 
     @Override

@@ -1,4 +1,4 @@
-package br.com.makersweb.makersfood.domain.product;
+package br.com.makersweb.makersfood.domain.group;
 
 import br.com.makersweb.makersfood.domain.Identifier;
 import br.com.makersweb.makersfood.domain.utils.IdUtils;
@@ -8,20 +8,20 @@ import java.util.Objects;
 /**
  * @author aaristides
  */
-public class ProductID extends Identifier {
+public class GroupID extends Identifier {
 
     private final String value;
 
-    private ProductID(final String value) {
+    private GroupID(final String value) {
         this.value = Objects.requireNonNull(value);
     }
 
-    public static ProductID unique() {
-        return ProductID.from(IdUtils.uuid());
+    public static GroupID unique() {
+        return GroupID.from(IdUtils.uuid());
     }
 
-    public static ProductID from(final String anId) {
-        return new ProductID(anId);
+    public static GroupID from(final String anId) {
+        return new GroupID(anId);
     }
 
     @Override
@@ -33,8 +33,8 @@ public class ProductID extends Identifier {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProductID productID = (ProductID) o;
-        return Objects.equals(getValue(), productID.getValue());
+        GroupID groupID = (GroupID) o;
+        return Objects.equals(getValue(), groupID.getValue());
     }
 
     @Override

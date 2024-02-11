@@ -1,9 +1,9 @@
 package br.com.makersweb.makersfood.domain.kitchen;
 
 import br.com.makersweb.makersfood.domain.Identifier;
+import br.com.makersweb.makersfood.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author aaristides
@@ -17,15 +17,11 @@ public class KitchenID extends Identifier {
     }
 
     public static KitchenID unique() {
-        return KitchenID.from(UUID.randomUUID());
+        return KitchenID.from(IdUtils.uuid());
     }
 
     public static KitchenID from(final String anId) {
         return new KitchenID(anId);
-    }
-
-    public static KitchenID from(final UUID anId) {
-        return new KitchenID(anId.toString().toLowerCase());
     }
 
     @Override

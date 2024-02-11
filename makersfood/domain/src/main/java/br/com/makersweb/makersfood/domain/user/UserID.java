@@ -1,9 +1,9 @@
 package br.com.makersweb.makersfood.domain.user;
 
 import br.com.makersweb.makersfood.domain.Identifier;
+import br.com.makersweb.makersfood.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author aaristides
@@ -17,15 +17,11 @@ public class UserID extends Identifier {
     }
 
     public static UserID unique() {
-        return UserID.from(UUID.randomUUID());
+        return UserID.from(IdUtils.uuid());
     }
 
     public static UserID from(final String anId) {
         return new UserID(anId);
-    }
-
-    public static UserID from(final UUID anId) {
-        return new UserID(anId.toString().toLowerCase());
     }
 
     @Override

@@ -1,9 +1,9 @@
 package br.com.makersweb.makersfood.domain.restaurant;
 
 import br.com.makersweb.makersfood.domain.Identifier;
+import br.com.makersweb.makersfood.domain.utils.IdUtils;
 
 import java.util.Objects;
-import java.util.UUID;
 
 /**
  * @author aaristides
@@ -17,15 +17,11 @@ public class RestaurantID extends Identifier {
     }
 
     public static RestaurantID unique() {
-        return RestaurantID.from(UUID.randomUUID());
+        return RestaurantID.from(IdUtils.uuid());
     }
 
     public static RestaurantID from(final String anId) {
         return new RestaurantID(anId);
-    }
-
-    public static RestaurantID from(final UUID anId) {
-        return new RestaurantID(anId.toString().toLowerCase());
     }
 
     @Override
