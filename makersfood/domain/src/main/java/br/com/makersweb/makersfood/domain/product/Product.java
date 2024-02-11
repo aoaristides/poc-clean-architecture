@@ -54,7 +54,7 @@ public class Product extends AggregateRoot<ProductID> {
         final var anId = ProductID.unique();
         final var now = InstantUtils.now();
         final var deletedAt = active ? null : now;
-        return new Product(anId, name, description, price, active, null, now, deletedAt, now);
+        return new Product(anId, name, description, price, active, null, now, now, deletedAt);
     }
 
     public static Product with(

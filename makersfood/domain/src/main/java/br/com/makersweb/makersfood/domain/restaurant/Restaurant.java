@@ -1,6 +1,7 @@
 package br.com.makersweb.makersfood.domain.restaurant;
 
 import br.com.makersweb.makersfood.domain.AggregateRoot;
+import br.com.makersweb.makersfood.domain.address.Address;
 import br.com.makersweb.makersfood.domain.kitchen.KitchenID;
 import br.com.makersweb.makersfood.domain.payment.PaymentID;
 import br.com.makersweb.makersfood.domain.product.ProductID;
@@ -63,14 +64,13 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
     public static Restaurant newRestaurant(
             final String name,
             final BigDecimal freightRate,
-            final KitchenID kitchen,
             final Address address,
             final boolean active,
             final boolean open
     ) {
         final var anId = RestaurantID.unique();
         final var now = Instant.now();
-        return new Restaurant(anId, name, freightRate, kitchen, address, active, open, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), now, now);
+        return new Restaurant(anId, name, freightRate, null, address, active, open, new ArrayList<>(), new ArrayList<>(), new ArrayList<>(), now, now);
     }
 
     public static Restaurant with(
@@ -148,6 +148,15 @@ public class Restaurant extends AggregateRoot<RestaurantID> {
 
     public Restaurant activate() {
         this.active = true;
+        this.updatedAt = InstantUtils.now();
+        return this;
+    }
+
+    public Restaurant addKitchen(final KitchenID kitchenID) {
+        if (kitchenID == null) {
+            return this;
+        }
+        this.kitchen = kitchenID;
         this.updatedAt = InstantUtils.now();
         return this;
     }

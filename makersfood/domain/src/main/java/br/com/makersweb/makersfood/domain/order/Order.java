@@ -1,9 +1,9 @@
 package br.com.makersweb.makersfood.domain.order;
 
 import br.com.makersweb.makersfood.domain.AggregateRoot;
+import br.com.makersweb.makersfood.domain.address.Address;
 import br.com.makersweb.makersfood.domain.item.OrderItemID;
 import br.com.makersweb.makersfood.domain.payment.PaymentID;
-import br.com.makersweb.makersfood.domain.restaurant.Address;
 import br.com.makersweb.makersfood.domain.restaurant.RestaurantID;
 import br.com.makersweb.makersfood.domain.user.UserID;
 import br.com.makersweb.makersfood.domain.utils.InstantUtils;

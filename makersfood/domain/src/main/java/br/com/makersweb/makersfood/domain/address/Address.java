@@ -1,4 +1,4 @@
-package br.com.makersweb.makersfood.domain.restaurant;
+package br.com.makersweb.makersfood.domain.address;
 
 import br.com.makersweb.makersfood.domain.ValueObject;
 import br.com.makersweb.makersfood.domain.city.CityID;
