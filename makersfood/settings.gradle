@@ -1,3 +1,4 @@
 rootProject.name = 'makersfood'
 include 'domain'
+include 'application'
 

@@ -1,2 +1,4 @@
-package br.com.makersweb.makersfood.domain.kitchen;public interface KitchenGateway {
+package br.com.makersweb.makersfood.domain.kitchen;
+
+public interface KitchenGateway {
 }
