@@ -14,6 +14,7 @@ public interface StateApiPresenter {
         return new StateResponse(
                 output.id().getValue(),
                 output.name(),
+                output.description(),
                 output.createdAt(),
                 output.updatedAt()
         );
@@ -23,6 +24,7 @@ public interface StateApiPresenter {
         return new StateListResponse(
                 output.id().getValue(),
                 output.name(),
+                output.description(),
                 output.createdAt(),
                 output.updatedAt()
         );

@@ -13,8 +13,9 @@ public class StateTest {
     @Test
     public void givenAValidParams_whenCallNewState_thenInstantiateAState() {
         final var expectedName = "PR";
+        final var expectedDescriptionn = "Paraná";
 
-        final var actualState = State.newState(expectedName);
+        final var actualState = State.newState(expectedName, expectedDescriptionn);
 
         Assertions.assertNotNull(actualState);
         Assertions.assertNotNull(actualState.getId());
@@ -26,10 +27,11 @@ public class StateTest {
     @Test
     public void givenAnInvalidNullName_whenCallNewStateAndValidate_thenShouldReceiveError() {
         final String expectedName = null;
+        final var expectedDescriptionn = "Paraná";
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' should not be null";
 
-        final var actualState = State.newState(expectedName);
+        final var actualState = State.newState(expectedName, expectedDescriptionn);
         final var actualException = Assertions.assertThrows(DomainException.class, () -> actualState.validate(new ThrowsValidationHandler()));
 
         Assertions.assertEquals(expectedErrorCount, actualException.getErrors().size());
@@ -39,10 +41,11 @@ public class StateTest {
     @Test
     public void givenAnInvalidEmptyName_whenCallNewStateAndValidate_thenShouldReceiveError() {
         final var expectedName = " ";
+        final var expectedDescriptionn = "Paraná";
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' should not be empty";
 
-        final var actualState = State.newState(expectedName);
+        final var actualState = State.newState(expectedName, expectedDescriptionn);
         final var actualException = Assertions.assertThrows(DomainException.class, () -> actualState.validate(new ThrowsValidationHandler()));
 
         Assertions.assertEquals(expectedErrorCount, actualException.getErrors().size());
@@ -52,10 +55,11 @@ public class StateTest {
     @Test
     public void givenAnInvalidNameLengthLessThan2_whenCallNewStateAndValidate_thenShouldReceiveError() {
         final var expectedName = "F ";
+        final var expectedDescription = "F ";
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' must have 2 characters";
 
-        final var actualState = State.newState(expectedName);
+        final var actualState = State.newState(expectedName, expectedDescription);
         final var actualException = Assertions.assertThrows(DomainException.class, () -> actualState.validate(new ThrowsValidationHandler()));
 
         Assertions.assertEquals(expectedErrorCount, actualException.getErrors().size());
@@ -69,10 +73,11 @@ public class StateTest {
                 O empenho em analisar o desenvolvimento contínuo de distintas formas de atuação maximiza as possibilidades por conta das direções preferenciais no sentido do progresso.
                 Desta maneira, o acompanhamento das preferências de consumo causa impacto indireto na reavaliação do sistema de formação de quadros que corresponde às necessidades.
                 """;
+        final var expectedDescriptionn = "Paraná";
         final var expectedErrorCount = 1;
         final var expectedErrorMessage = "'name' must have 2 characters";
 
-        final var actualState = State.newState(expectedName);
+        final var actualState = State.newState(expectedName, expectedDescriptionn);
         final var actualException = Assertions.assertThrows(DomainException.class, () -> actualState.validate(new ThrowsValidationHandler()));
 
         Assertions.assertEquals(expectedErrorCount, actualException.getErrors().size());

@@ -83,7 +83,7 @@ public class CityPostgreSQLGateway implements CityGateway {
     public List<CityID> existsByIds(final Iterable<CityID> cityIDS) {
         final var ids = StreamSupport.stream(cityIDS.spliterator(), false)
                 .map(CityID::getValue).toList();
-        return this.repository.existsByIds(ids).stream().map(CityID::from).toList();
+        return this.repository.findByIds(ids).stream().map(CityID::from).toList();
     }
 
     private City save(final City aCity) {

@@ -15,40 +15,45 @@ import java.util.Objects;
 public class State extends AggregateRoot<StateID> {
 
     private String name;
+    private String description;
     private Instant createdAt;
     private Instant updatedAt;
 
     private State(
             final StateID stateID,
             final String name,
+            final String description,
             final Instant createdAt,
             final Instant updatedAt
     ) {
         super(stateID);
         this.name = name;
+        this.description = description;
         this.createdAt = Objects.requireNonNull(createdAt, "'createdAt' should not be null");
         this.updatedAt = Objects.requireNonNull(updatedAt, "'updatedAt' should not be null");
     }
 
     public static State newState(
-            final String name
+            final String name,
+            final String description
     ) {
         final var anId = StateID.unique();
         final var now = InstantUtils.now();
-        return new State(anId, name, now, now);
+        return new State(anId, name, description, now, now);
     }
 
     public static State with(
             final StateID stateID,
             final String name,
+            final String description,
             final Instant createdAt,
             final Instant updatedAt
     ) {
-        return new State(stateID, name, createdAt, updatedAt);
+        return new State(stateID, name, description, createdAt, updatedAt);
     }
 
     public static State with(final State aState) {
-        return with(aState.getId(), aState.name, aState.createdAt, aState.updatedAt);
+        return with(aState.getId(), aState.name, aState.description, aState.createdAt, aState.updatedAt);
     }
 
     @Override
@@ -56,8 +61,9 @@ public class State extends AggregateRoot<StateID> {
         new StateValidator(this, handler).validate();
     }
 
-    public State update(final String name) {
+    public State update(final String name, final String description) {
         this.name = name;
+        this.description = description;
         this.updatedAt = InstantUtils.now();
         selfValidate();
         return this;
@@ -74,6 +80,10 @@ public class State extends AggregateRoot<StateID> {
 
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public Instant getCreatedAt() {

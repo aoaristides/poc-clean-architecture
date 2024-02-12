@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author aaristides
@@ -17,6 +18,11 @@ public interface StateRepository extends JpaRepository<StateJpaEntity, String> {
     Page<StateJpaEntity> findAll(final Specification<StateJpaEntity> whereClause, final Pageable page);
 
     @Query(value = "select s.id from State s where s.id in :ids")
-    List<String> existsByIds(@Param("ids") List<String> ids);
+    boolean existsByIds(@Param("ids") List<String> ids);
+
+    @Query(value = "select s.id from State s where s.id in :ids")
+    List<String> findByIds(@Param("ids") List<String> ids);
+
+    Optional<StateJpaEntity> findByName(final String name);
 
 }

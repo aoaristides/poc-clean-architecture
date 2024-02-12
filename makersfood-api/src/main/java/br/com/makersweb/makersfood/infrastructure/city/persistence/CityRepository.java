@@ -17,6 +17,9 @@ public interface CityRepository extends JpaRepository<CityJpaEntity, String> {
     Page<CityJpaEntity> findAll(final Specification<CityJpaEntity> whereClause, final Pageable page);
 
     @Query(value = "select c.id from City c where c.id in :ids")
-    List<String> existsByIds(@Param("ids") List<String> ids);
+    boolean existsByIds(@Param("ids") List<String> ids);
+
+    @Query(value = "select c.id from City c where c.id in :ids")
+    List<String> findByIds(@Param("ids") List<String> ids);
 
 }

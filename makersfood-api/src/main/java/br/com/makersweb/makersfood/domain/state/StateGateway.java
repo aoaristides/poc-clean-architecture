@@ -17,6 +17,8 @@ public interface StateGateway {
 
     Optional<State> findById(final StateID anId);
 
+    Optional<State> findByName(final String name);
+
     State update(final State item);
 
     Pagination<State> findAll(final SearchQuery aQuery);

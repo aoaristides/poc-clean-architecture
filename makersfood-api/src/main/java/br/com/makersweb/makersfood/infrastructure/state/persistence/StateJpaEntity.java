@@ -23,6 +23,9 @@ public class StateJpaEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "description")
+    private String description;
+
     @Column(name = "created_at", nullable = false, columnDefinition = "TIMESTAMP")
     private Instant createdAt;
 
@@ -34,11 +37,13 @@ public class StateJpaEntity {
     private StateJpaEntity(
             final String id,
             final String name,
+            final String description,
             final Instant createdAt,
             final Instant updatedAt
     ) {
         this.id = id;
         this.name = name;
+        this.description = description;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -51,6 +56,7 @@ public class StateJpaEntity {
         return new StateJpaEntity(
                 aState.getId().getValue(),
                 aState.getName(),
+                aState.getDescription(),
                 aState.getCreatedAt(),
                 aState.getUpdatedAt()
         );
@@ -64,6 +70,7 @@ public class StateJpaEntity {
         return State.with(
                 StateID.from(getId()),
                 getName(),
+                getDescription(),
                 getCreatedAt(),
                 getUpdatedAt()
         );
@@ -83,6 +90,14 @@ public class StateJpaEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Instant getCreatedAt() {

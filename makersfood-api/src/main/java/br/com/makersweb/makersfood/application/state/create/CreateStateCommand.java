@@ -5,11 +5,12 @@ package br.com.makersweb.makersfood.application.state.create;
  * @param name
  */
 public record CreateStateCommand(
-        String name
+        String name,
+        String description
 ) {
 
-    public static CreateStateCommand with(final String name) {
-        return new CreateStateCommand(name);
+    public static CreateStateCommand with(final String name, final String description) {
+        return new CreateStateCommand(name, description);
     }
 
 }

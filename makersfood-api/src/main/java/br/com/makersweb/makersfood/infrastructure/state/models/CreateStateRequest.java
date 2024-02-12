@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * @author aaristides
  * @param name
+ * @param description
  */
 public record CreateStateRequest(
-        @JsonProperty("name") String name
+        @JsonProperty("name") String name,
+        @JsonProperty("description") String description
 ) {
 }

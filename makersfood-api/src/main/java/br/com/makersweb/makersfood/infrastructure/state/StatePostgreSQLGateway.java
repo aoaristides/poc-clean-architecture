@@ -50,6 +50,11 @@ public class StatePostgreSQLGateway implements StateGateway {
     }
 
     @Override
+    public Optional<State> findByName(final String name) {
+        return this.repository.findByName(name).map(StateJpaEntity::toAggregate);
+    }
+
+    @Override
     public State update(final State aState) {
         return save(aState);
     }
@@ -82,7 +87,7 @@ public class StatePostgreSQLGateway implements StateGateway {
     @Override
     public List<StateID> existsByIds(final Iterable<StateID> stateIDS) {
         final var ids = StreamSupport.stream(stateIDS.spliterator(), false).map(StateID::getValue).toList();
-        return this.repository.existsByIds(ids).stream().map(StateID::from).toList();
+        return this.repository.findByIds(ids).stream().map(StateID::from).toList();
     }
 
     private State save(final State aState) {

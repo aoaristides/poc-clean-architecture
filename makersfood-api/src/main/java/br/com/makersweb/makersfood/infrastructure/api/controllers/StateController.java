@@ -52,7 +52,7 @@ public class StateController implements StateAPI {
 
     @Override
     public ResponseEntity<?> createState(final CreateStateRequest input) {
-        final var aCommand = CreateStateCommand.with(input.name());
+        final var aCommand = CreateStateCommand.with(input.name(), input.description());
 
         final var output = this.createStateUseCase.execute(aCommand);
 
@@ -72,7 +72,7 @@ public class StateController implements StateAPI {
 
     @Override
     public ResponseEntity<?> updateById(final String id, final UpdateStateRequest input) {
-        final var aCommand = UpdateStateCommand.with(id, input.name());
+        final var aCommand = UpdateStateCommand.with(id, input.name(), input.description());
 
         final Function<Notification, ResponseEntity<?>> onError = notification ->
                 ResponseEntity.unprocessableEntity().body(notification);

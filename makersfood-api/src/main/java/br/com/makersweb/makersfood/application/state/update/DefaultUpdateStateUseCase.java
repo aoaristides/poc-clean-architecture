@@ -29,10 +29,11 @@ public class DefaultUpdateStateUseCase extends UpdateStateUseCase {
     public Either<Notification, UpdateStateOutput> execute(final UpdateStateCommand aCommand) {
         final var anId = StateID.from(aCommand.id());
         final var aName = aCommand.name();
+        final var aDescription = aCommand.description();
 
         final var aState = this.stateGateway.findById(anId).orElseThrow(notFound(anId));
         final var notification = Notification.create();
-        aState.update(aName).validate(notification);
+        aState.update(aName, aDescription).validate(notification);
 
         return notification.hasError() ? Left(notification) : update(aState);
     }

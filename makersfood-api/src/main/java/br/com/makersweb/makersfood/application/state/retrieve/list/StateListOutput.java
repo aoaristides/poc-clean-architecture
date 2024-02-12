@@ -15,12 +15,13 @@ import java.time.Instant;
 public record StateListOutput(
         StateID id,
         String name,
+        String description,
         Instant createdAt,
         Instant updatedAt
 ) {
 
     public static StateListOutput from(final State aState) {
-        return new StateListOutput(aState.getId(), aState.getName(), aState.getCreatedAt(), aState.getUpdatedAt());
+        return new StateListOutput(aState.getId(), aState.getName(), aState.getDescription(), aState.getCreatedAt(), aState.getUpdatedAt());
     }
 
 }
