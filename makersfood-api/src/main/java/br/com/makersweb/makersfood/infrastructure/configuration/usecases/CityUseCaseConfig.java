@@ -11,6 +11,7 @@ import br.com.makersweb.makersfood.application.city.retrieve.list.ListCitiesUseC
 import br.com.makersweb.makersfood.application.city.update.DefaultUpdateCityUseCase;
 import br.com.makersweb.makersfood.application.city.update.UpdateCityUseCase;
 import br.com.makersweb.makersfood.domain.city.CityGateway;
+import br.com.makersweb.makersfood.domain.state.StateGateway;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,19 +24,24 @@ import java.util.Objects;
 public class CityUseCaseConfig {
 
     private final CityGateway cityGateway;
+    private final StateGateway stateGateway;
 
-    public CityUseCaseConfig(final CityGateway cityGateway) {
+    public CityUseCaseConfig(
+            final CityGateway cityGateway,
+            final StateGateway stateGateway
+    ) {
         this.cityGateway = Objects.requireNonNull(cityGateway);
+        this.stateGateway = Objects.requireNonNull(stateGateway);
     }
 
     @Bean
     public CreateCityUseCase createCityUseCase() {
-        return new DefaultCreateCityUseCase(cityGateway);
+        return new DefaultCreateCityUseCase(cityGateway, stateGateway);
     }
 
     @Bean
     public UpdateCityUseCase updateCityUseCase() {
-        return new DefaultUpdateCityUseCase(cityGateway);
+        return new DefaultUpdateCityUseCase(cityGateway, stateGateway);
     }
 
     @Bean

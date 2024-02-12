@@ -50,6 +50,11 @@ public class CityPostgreSQLGateway implements CityGateway {
     }
 
     @Override
+    public Optional<City> findByName(final String name) {
+        return this.repository.findByName(name).map(CityJpaEntity::toAggregate);
+    }
+
+    @Override
     public City update(final City city) {
         return save(city);
     }

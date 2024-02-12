@@ -17,6 +17,8 @@ public interface CityGateway {
 
     Optional<City> findById(final CityID anId);
 
+    Optional<City> findByName(final String name);
+
     City update(final City city);
 
     Pagination<City> findAll(final SearchQuery aQuery);
