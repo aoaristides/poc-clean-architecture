@@ -1,0 +1,13 @@
+
+db:
+  username: ${DATABASE_PG_USERNAME:adm_makers_user}
+  password: ${DATABASE_PG_PASSWORD:Salmos89!}
+  schema: adm_makersfood_db
+  url: ${DATABASE_PG_URL:localhost:5432}
+
+server:
+  port: 8080
+  undertow:
+    threads:
+      worker: 10
+      io: 2
